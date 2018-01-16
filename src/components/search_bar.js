@@ -22,6 +22,10 @@ class SearchBar extends Component {
   }
 
   render() {
+    const alertMessage = this.props.alert ?
+      (<p>{this.props.alert}</p>) :
+      undefined;
+
     return (
       <form onSubmit={this.onFormSubmit} className="input-group" >
         <input
@@ -32,13 +36,20 @@ class SearchBar extends Component {
         <span className="input-group-btn">
           <button type="submit" className="btn btn-secondary">Submit</button>
         </span>
+        {alertMessage}
       </form>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    alert: state.alert
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchWeather }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

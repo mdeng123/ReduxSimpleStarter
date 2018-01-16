@@ -14,3 +14,21 @@ export function fetchWeather(city) {
     payload: request
   };
 }
+
+export const DELETE_WEATHER = 'DELETE_WEATHER';
+
+export function deleteWeather(city) {
+  return {
+    type: DELETE_WEATHER,
+    city: city
+  }
+}
+
+export const SEND_ALERT = 'SEND_ALERT';
+
+export function sendAlert(msg) {
+  return {
+    type: SEND_ALERT,
+    msg: msg
+  }
+}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Chart from './chart';
 import GoogleMap from './google_map';
+import { bindActionCreators } from 'redux';
+import { deleteWeather } from '../actions/index';
 
 class WeatherList extends Component {
   renderWeather = (cityData) => {
@@ -29,6 +31,9 @@ class WeatherList extends Component {
         </td>
         <td>
           <Chart color="black" data={humidities} />
+        </td>
+        <td>
+          <button onClick={() => this.props.deleteWeather(name)}>Delete</button>
         </td>
       </tr>
     )
@@ -59,4 +64,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(WeatherList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ deleteWeather }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherList);
